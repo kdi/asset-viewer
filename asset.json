@@ -1,0 +1,41 @@
+{
+	"name": "Dreamway Palm",
+	"version": "0.1.0",
+	"description": "It's like the new teapot...",
+	"author": "kdi",
+	"keywords": [
+		"3d",
+		"model",
+		"dreamway",
+		"palm"
+	],
+	"contributors": [
+		{
+			"name": "Makis Tracend",
+			"email": "makis@kdi.co"
+		}
+	],
+	"homepage": "http://kdi.co",
+	"sources": {
+		"meshes": {
+			"m1": "//cdn.kdi.co/3d/nature/trees/0001/1k/mesh.bin",
+			"m2": "//cdn.kdi.co/3d/nature/trees/0001/512/mesh.bin",
+			"m3": "//cdn.kdi.co/3d/nature/trees/0001/256/mesh.bin"
+		},
+		"animations": {
+
+		},
+		"sounds": {
+
+		}
+	},
+	"licenses": [
+		{
+			"type": "All rights reserved © K&D Interactive",
+			"url": "http://kdi.co/terms"
+		}
+	],
+	"dependencies": {
+
+	}
+}
