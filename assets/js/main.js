@@ -22,7 +22,10 @@ construct.configure(function(){
 
 	APP.Models.Asset = APP.Model.extend({
 		defaults: {
-			meshes: {}
+			meshes: {}, // LOD m1, m2, m3
+			animations: {}, // collection of animations
+			sounds: {}, // collection of sounds
+			shaders: {} //
 		},
 		url: function(){
 			return this.asset;
@@ -82,7 +85,7 @@ construct.configure(function(){
 			if( _.isEmpty( this.model.get("sources") ) ) return;
 
 			// load model
-			var src = this.model.get("sources")[0].meshes.m1;
+			var src = this.model.get("sources").meshes.m1;
 			//
 			//$el = $("asset").attr("src", src);
 			//$el = $("<scene><asset src='"+ src +"'></asset><camera></camera></scene>");
