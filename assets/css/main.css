@@ -1,0 +1,32 @@
+* {
+	font-family: helvetica, arial, sans-serif;
+	font-size: 100%;
+}
+
+h1 {
+	text-align: center;
+	font-size: 2em;
+}
+
+form {
+	text-align: center;
+}
+
+input {
+	font-size: 2em;
+}
+
+.viewer {
+	width: 800px;
+	height: 800px;
+	margin: 12px auto;
+	background: #000;
+}
+
+camera {
+	-webkit-transform: translate3d( 0, 0, 400px);
+}
+
+scene {
+	color: #ffffff;
+}
