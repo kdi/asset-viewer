@@ -23,6 +23,7 @@ construct.configure(function(){
 	APP.Layouts.Main = APP.Layout.extend({
 
 		events: {
+			"input input[type='range']": "rangeChange",
 			"submit form": "loadAsset"
 		},
 
@@ -42,6 +43,11 @@ construct.configure(function(){
 			var asset = $(e.target).find("input[type='text']").val();
 			this.options.data.url = asset;
 			this.options.data.fetch();
+		},
+
+		rangeChange: function(){
+			var value = $("input[type='range']").val();
+			this.get("viewer").updateZoom( value );
 		}
 
 	});
@@ -71,7 +77,7 @@ construct.configure(function(){
 			//
 			//$el = $("asset").attr("src", src);
 			//$el = $("<scene><asset src='"+ src +"'></asset><camera></camera></scene>");
-			this.$3d.addScene().addCamera();
+			this.$3d.addScene().addCamera({ far: 100000 });
 			this.$3d.add({ type: "asset", src: src });
 			//this.$3d.append($el);
 			//this.$3d.append( $el );
@@ -94,8 +100,8 @@ construct.configure(function(){
 		},
 
 		mousemove: function( e ){
-			// look around
-			this.lookArround(e);
+			// look around (temporarily disabled)
+			//this.lookArround(e);
 		},
 
 		lookArround: function(e){
@@ -117,6 +123,11 @@ construct.configure(function(){
 			$3d.active.camera.position.y += ( - (mouseY * multiplier) - $3d.active.camera.position.y ) * speed;
 		//}
 
+		},
+
+		updateZoom: function( value ){
+			var camera = this.$3d.active.camera;
+			camera.position.z = value;
 		}
 
 	});

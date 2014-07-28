@@ -28,5 +28,9 @@ camera {
 }
 
 scene {
-	color: #ffffff;
+	/*color: #ffffff;*/
+}
+
+input[type='range'] {
+	width: 100%;
 }
