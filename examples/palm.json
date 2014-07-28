@@ -18,9 +18,7 @@
 	"homepage": "http://kdi.co",
 	"sources": {
 		"meshes": {
-			"m1": "//cdn.kdi.co/3d/nature/trees/0001/1k/mesh.bin",
-			"m2": "//cdn.kdi.co/3d/nature/trees/0001/512/mesh.bin",
-			"m3": "//cdn.kdi.co/3d/nature/trees/0001/256/mesh.bin"
+			"m1": "palm/mesh.bin"
 		},
 		"animations": {
 

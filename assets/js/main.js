@@ -24,6 +24,7 @@ construct.configure(function(){
 
 		events: {
 			"input input[type='range']": "rangeChange",
+			"click .examples a": "loadExample",
 			"submit form": "loadAsset"
 		},
 
@@ -48,6 +49,15 @@ construct.configure(function(){
 		rangeChange: function(){
 			var value = $("input[type='range']").val();
 			this.get("viewer").updateZoom( value );
+		},
+
+		loadExample: function( e ){
+			e.preventDefault();
+			var asset = $(e.target).attr("href");
+			// update input field
+			$(this.el).find("input[type='text']").val(asset);
+			// submit form
+			$(this.el).find("form:first").submit();
 		}
 
 	});
