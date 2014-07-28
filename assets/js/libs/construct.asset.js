@@ -68,7 +68,7 @@ construct.promise.add(function(){
 	if( types.indexOf("bin") > -1 ) {
 	}
 
-	// in case APP.Mesh has already been defined by a plugin
+	// in case APP.Mesh has already been defined
 	var Main3D = APP.Views.Main3D || APP.View;
 
 	APP.Views.Main3D = Main3D.extend({
@@ -89,7 +89,42 @@ construct.promise.add(function(){
 
 	});
 
-	// Helpers
+	// base model using sources from asset.json
+	APP.Models.Asset = APP.Model.extend({
+		defaults: {
+			meshes: {}, // LOD m1, m2, m3
+			animations: {}, // collection of animations
+			sounds: {}, // collection of sounds
+			shaders: {} //
+		},
+		/*
+		url: function(){
+			return this.asset;
+		},
+		asset: "", // add default model...
+		*/
+		parse: function( data ){
+			//console.log( data );
+			// what to do with the other (meta) data?
+			return data.sources || data;
+		},
+
+		getMesh: function(){
+			var src = this.get("meshes").m1;
+			// add full path if missing
+			if( !_.isURL( src ) ){
+				// get the url from the asset location
+				var url = _.getDir(this.url);
+				src = url + src;
+				if( !_.isURL(url) ){
+					// use the page location
+					src = window.location.href + src;
+				}
+			}
+			return src;
+		}
+	});
+
 	// jQuery Three extension for asset.json
 	Three.prototype.fn.webgl.asset = function( options, callback ){
 		// define the group (once)
@@ -117,6 +152,30 @@ construct.promise.add(function(){
 		});
 
 	}
+
+
+	// Helpers
+	_.mixin({
+		// - Checks if a string is a full URL
+		// Source: https://gist.github.com/tracend/a522e5a169aad662fa80
+		isURL: function ( url ) {
+			// prerequisite
+			if( typeof url != "string" ) return false;
+			//
+			return ( url.substr(0, 4) == "http" || url.substr(0, 2) == "//" );
+		},
+
+		// - Returns the directory of a url or full path
+		// Source: https://gist.github.com/tracend/31436d82befafab96d15
+		getDir: function ( url ) {
+			// prerequisite
+			if( typeof url != "string" ) return "";
+			//
+			var location = url.match(/^.*[\\\/]/);
+			// return if there are any matches...
+			return ( location !== null ) ? location[0] : "";
+		}
+	});
 
 
 });

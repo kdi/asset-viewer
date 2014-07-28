@@ -20,25 +20,6 @@ construct.configure(function(){
 		}
 	});
 
-	APP.Models.Asset = APP.Model.extend({
-		defaults: {
-			meshes: {}, // LOD m1, m2, m3
-			animations: {}, // collection of animations
-			sounds: {}, // collection of sounds
-			shaders: {} //
-		},
-		url: function(){
-			return this.asset;
-		},
-		asset: "", // add default model...
-
-		parse: function( data ){
-			console.log( data );
-			return data;
-		}
-
-	});
-
 	APP.Layouts.Main = APP.Layout.extend({
 
 		events: {
@@ -59,7 +40,7 @@ construct.configure(function(){
 		loadAsset: function( e ){
 			e.preventDefault();
 			var asset = $(e.target).find("input[type='text']").val();
-			this.options.data.asset = asset;
+			this.options.data.url = asset;
 			this.options.data.fetch();
 		}
 
@@ -82,10 +63,11 @@ construct.configure(function(){
 		*/
 		postRender: function(){
 			// prerequisite
-			if( _.isEmpty( this.model.get("sources") ) ) return;
+			if( _.isEmpty( this.model.get("meshes") ) ) return;
 
 			// load model
-			var src = this.model.get("sources").meshes.m1;
+			var src = this.model.getMesh();
+
 			//
 			//$el = $("asset").attr("src", src);
 			//$el = $("<scene><asset src='"+ src +"'></asset><camera></camera></scene>");
